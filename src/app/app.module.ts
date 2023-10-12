@@ -2,21 +2,19 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { DashboardModule } from './pages/dashboard/dashboard.module';
 
 @NgModule({
-  declarations: [AppComponent, DashboardComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    FontAwesomeModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent],
+    declarations: [AppComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        DashboardModule,
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
 })
 export class AppModule {}
