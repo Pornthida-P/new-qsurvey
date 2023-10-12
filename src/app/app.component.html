@@ -1,1 +1,56 @@
+<div class="grid">
+    <div class="col-10">
+        <div class="grid flex justify-content-center">
+            <div class="col-10 m-0 p-0">
+                <p-menubar
+                    [model]="menuItems"
+                    [style]="{ background: 'none', border: 'none' }"
+                >
+                    <ng-template pTemplate="start">
+                        <img
+                            src="/assets/new-qsurvey/images/logo_qserve.webp"
+                            height="40"
+                            class="ml-4 mr-6"
+                        />
+                    </ng-template>
+                </p-menubar>
+            </div>
+        </div>
+    </div>
+    <div class="col-2 flex justify-content-end">
+        <div class="grid pr-2">
+            <div class="col-6 align-self-end">
+                <p-dropdown
+                    [options]="language"
+                    [(ngModel)]="selectedLanguage"
+                    optionLabel="name"
+                    [style]="{
+                        background: '#E4E6EF',
+                        border: '#E0E2FA',
+                    }"
+                ></p-dropdown>
+            </div>
+            <div
+                class="col-6 mb-2 surface-100 border-round pb-0 align-self-end"
+            >
+                <div class="grid">
+                    <div class="col-6 m-0 mr-2">
+                        <p class="m-0 text-xs">Admin01</p>
+                        <p class="m-0 text-xs">ADMIN</p>
+                    </div>
+                    <div
+                        class="col-5 m-0 flex justify-content-center align-items-center"
+                    >
+                        <div
+                            class="flex align-items-center justify-content-center bg-white border-round"
+                            style="width: 2rem; height: 1.8rem"
+                        >
+                            A
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <router-outlet></router-outlet>
