@@ -32,11 +32,14 @@
                         background: '#E4E6EF',
                         border: '#E0E2FA',
                     }"
-                ></p-dropdown>
+                    (onChange)="onLanguageChange($event)"
+                >
+                    ></p-dropdown
+                >
             </div>
             <div
                 class="surface-100 border-round pb-0 align-self-end cursor-pointer"
-                (click)="sidebarVisible2 = true"
+                (click)="sidebarVisible = true"
             >
                 <div class="flex flex-row gap-2 p-2">
                     <div>
@@ -54,7 +57,7 @@
         </div>
     </div>
 </div>
-<p-sidebar [(visible)]="sidebarVisible2" position="right">
+<p-sidebar [(visible)]="sidebarVisible" position="right">
     <ng-template pTemplate="header"
         ><p class="m-0 text-xl">User Profile</p>
     </ng-template>

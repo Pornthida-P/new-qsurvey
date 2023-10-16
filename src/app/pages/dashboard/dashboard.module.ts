@@ -6,6 +6,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { TableModule } from 'primeng/table';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
     declarations: [DashboardComponent],
@@ -20,6 +21,7 @@ import { RouterModule } from '@angular/router';
                 component: DashboardComponent,
             },
         ]),
+        TranslateModule,
     ],
 })
 export class DashboardModule {}

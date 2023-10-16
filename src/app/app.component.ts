@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
+import { TranslationService } from './i18n/translation.service';
 
 interface Language {
     name: string;
@@ -15,10 +16,13 @@ export class AppComponent implements OnInit {
 
     language: Language[] | undefined;
 
-    sidebarVisible2: boolean = false;
-    selectedLanguage: Language | undefined;
+    sidebarVisible: boolean = false;
+    selectedLanguage!: Language;
     menuItems: MenuItem[] = [
-        { label: 'Dashboard', routerLink: ['/dashboard'] },
+        {
+            label: 'Dashboard',
+            routerLink: ['/dashboard', { lang: this.selectedLanguage?.code }],
+        },
         {
             label: 'Question Management',
             routerLink: ['/'],
@@ -37,10 +41,22 @@ export class AppComponent implements OnInit {
         },
     ];
 
-    ngOnInit() {
+    constructor(private translationService: TranslationService) {
         this.language = [
-            { name: 'TH', code: 'TH' },
-            { name: 'ENG', code: 'ENG' },
+            { name: 'TH', code: 'th' },
+            { name: 'ENG', code: 'en' },
         ];
+        this.language.forEach((element: any) => {
+            if (element.code == this.translationService.getSelectedLanguage()) {
+                this.selectedLanguage = element;
+            }
+        });
+        this.translationService.setLanguage(this.selectedLanguage?.code);
+    }
+
+    ngOnInit() {}
+
+    onLanguageChange(event: any) {
+        this.translationService.setLanguage(event?.value?.code);
     }
 }

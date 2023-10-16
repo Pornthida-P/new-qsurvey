@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardModule } from './pages/dashboard/dashboard.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { MenubarModule } from 'primeng/menubar';
 import { DropdownModule } from 'primeng/dropdown';
@@ -22,6 +23,7 @@ import { BadgeModule } from 'primeng/badge';
         BrowserAnimationsModule,
         FormsModule,
         DashboardModule,
+        TranslateModule.forRoot(),
         MenubarModule,
         DropdownModule,
         SidebarModule,

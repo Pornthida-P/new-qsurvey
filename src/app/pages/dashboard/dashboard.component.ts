@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
     faMeh,
     faSadCry,
@@ -8,13 +8,16 @@ import {
 } from '@fortawesome/free-regular-svg-icons';
 
 import { faUsers } from '@fortawesome/free-solid-svg-icons';
+import { TranslationService } from 'src/app/i18n/translation.service';
+import { locale as enLang } from 'src/assets/new-qsurvey/i18n/en';
+import { locale as thLang } from 'src/assets/new-qsurvey/i18n/th';
 
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.css'],
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
     faUsers = faUsers;
     smiley = [
         {
@@ -72,7 +75,9 @@ export class DashboardComponent {
             total: 0,
         },
     ];
-    constructor() {
+    constructor(private translationService: TranslationService) {
+        this.translationService.loadTranslations(enLang, thLang);
+
         var series = [62, 38, 10, 0, 0];
         var total = series.reduce(
             (accumulator, currentValue) => accumulator + currentValue,
@@ -113,4 +118,5 @@ export class DashboardComponent {
             colors: ['#1791f4', '#00bdb4', '#ffb443', '#ff6347', '#ed143d'],
         };
     }
+    ngOnInit(): void {}
 }
