@@ -42,6 +42,7 @@ export class AppComponent implements OnInit {
     onLanguageChange(event: any) {
         this.translationService.setLanguage(event?.value?.code);
         this.setItemMenu();
+        window.location.reload();
     }
 
     setItemMenu() {

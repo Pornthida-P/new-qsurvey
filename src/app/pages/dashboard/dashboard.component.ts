@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, OnInit } from '@angular/core';
 import {
     faMeh,
     faSadCry,
@@ -17,35 +17,35 @@ import { locale as thLang } from 'src/assets/new-qsurvey/i18n/th';
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.css'],
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, AfterViewChecked {
     faUsers = faUsers;
     smiley = [
         {
-            name: 'Excellent',
+            name: 'DASHBOARD.EXCELLENT',
             percent: 47,
             bgColor: '#1791f4',
             icon: faSmileWink,
         },
         {
-            name: 'Good',
+            name: 'DASHBOARD.GOOD',
             percent: 46,
             bgColor: '#00bdb4',
             icon: faSmile,
         },
         {
-            name: 'Average',
+            name: 'DASHBOARD.AVERAGE',
             percent: 5,
             bgColor: '#ffb443',
             icon: faMeh,
         },
         {
-            name: 'Poor',
+            name: 'DASHBOARD.POOR',
             percent: 0,
             bgColor: '#ff6347',
             icon: faSadTear,
         },
         {
-            name: 'Very Poor',
+            name: 'DASHBOARD.VERY_POOR',
             percent: 0,
             bgColor: '#ed143d',
             icon: faSadCry,
@@ -55,35 +55,51 @@ export class DashboardComponent implements OnInit {
 
     data = [
         {
-            name: 'Excellent',
+            name: 'DASHBOARD.EXCELLENT',
             total: 62,
         },
         {
-            name: 'Good',
+            name: 'DASHBOARD.GOOD',
             total: 38,
         },
         {
-            name: 'Average',
+            name: 'DASHBOARD.AVERAGE',
             total: 10,
         },
         {
-            name: 'Poor',
+            name: 'DASHBOARD.POOR',
             total: 0,
         },
         {
-            name: 'Very Poor',
+            name: 'DASHBOARD.VERY_POOR',
             total: 0,
         },
     ];
+
     constructor(private translationService: TranslationService) {
         this.translationService.loadTranslations(enLang, thLang);
+        this.generateChart();
+    }
+    ngAfterViewChecked(): void {
+        console.log('rewrite chart');
+        // this.generateChart();
+    }
 
+    ngOnInit(): void {}
+
+    generateChart() {
         var series = [62, 38, 10, 0, 0];
         var total = series.reduce(
             (accumulator, currentValue) => accumulator + currentValue,
             0
         );
-        var labels = ['Excellent', 'Good', 'Average', 'Poor', 'Very Poor'];
+        var labels = [
+            this.translationService.getInstant('DASHBOARD.EXCELLENT'),
+            this.translationService.getInstant('DASHBOARD.GOOD'),
+            this.translationService.getInstant('DASHBOARD.AVERAGE'),
+            this.translationService.getInstant('DASHBOARD.POOR'),
+            this.translationService.getInstant('DASHBOARD.VERY_POOR'),
+        ];
         this.chartOptions = {
             series: series,
             chart: {
@@ -102,7 +118,9 @@ export class DashboardComponent implements OnInit {
                         },
                         total: {
                             show: true,
-                            label: 'Total',
+                            label: this.translationService.getInstant(
+                                'DASHBOARD.TOTAL'
+                            ),
                             color: '#000000',
                             formatter: function () {
                                 return total;
@@ -118,5 +136,4 @@ export class DashboardComponent implements OnInit {
             colors: ['#1791f4', '#00bdb4', '#ffb443', '#ff6347', '#ed143d'],
         };
     }
-    ngOnInit(): void {}
 }
