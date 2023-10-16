@@ -14,7 +14,8 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "allowedCommonJsDependencies": [
-            "apexcharts"
+            "apexcharts",
+            "exceljs"
           ],
             "outputPath": "dist/new-qsurvey",
             "index": "src/index.html",

@@ -5,8 +5,10 @@ import { DashboardComponent } from './dashboard.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { TableModule } from 'primeng/table';
+import { CalendarModule } from 'primeng/calendar';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [DashboardComponent],
@@ -15,6 +17,7 @@ import { TranslateModule } from '@ngx-translate/core';
         FontAwesomeModule,
         NgApexchartsModule,
         TableModule,
+        CalendarModule,
         RouterModule.forChild([
             {
                 path: '',
@@ -22,6 +25,7 @@ import { TranslateModule } from '@ngx-translate/core';
             },
         ]),
         TranslateModule,
+        FormsModule,
     ],
 })
 export class DashboardModule {}

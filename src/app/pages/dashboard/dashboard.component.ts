@@ -11,13 +11,15 @@ import { faUsers } from '@fortawesome/free-solid-svg-icons';
 import { TranslationService } from 'src/app/i18n/translation.service';
 import { locale as enLang } from 'src/assets/new-qsurvey/i18n/en';
 import { locale as thLang } from 'src/assets/new-qsurvey/i18n/th';
+import * as ExcelJS from 'exceljs';
+import { config } from 'src/app/config/config';
 
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.css'],
 })
-export class DashboardComponent implements OnInit, AfterViewChecked {
+export class DashboardComponent implements OnInit {
     faUsers = faUsers;
     smiley = [
         {
@@ -51,6 +53,9 @@ export class DashboardComponent implements OnInit, AfterViewChecked {
             icon: faSadCry,
         },
     ];
+
+    showDetail: boolean = false;
+
     chartOptions: any = {};
 
     data = [
@@ -76,13 +81,30 @@ export class DashboardComponent implements OnInit, AfterViewChecked {
         },
     ];
 
+    dataTable = [
+        {
+            question: 'Q1',
+            excellent: 23,
+            good: 26,
+            average: 14,
+            poor: 0,
+            very_poor: 0,
+        },
+        {
+            question: 'Q2',
+            excellent: 32,
+            good: 19,
+            average: 24,
+            poor: 0,
+            very_poor: 0,
+        },
+    ];
+
+    fileType: string = config.file.type;
+    rangeDates!: Date[];
     constructor(private translationService: TranslationService) {
         this.translationService.loadTranslations(enLang, thLang);
         this.generateChart();
-    }
-    ngAfterViewChecked(): void {
-        console.log('rewrite chart');
-        // this.generateChart();
     }
 
     ngOnInit(): void {}
@@ -135,5 +157,63 @@ export class DashboardComponent implements OnInit, AfterViewChecked {
             },
             colors: ['#1791f4', '#00bdb4', '#ffb443', '#ff6347', '#ed143d'],
         };
+    }
+
+    setShowDetail() {
+        this.showDetail = !this.showDetail;
+    }
+
+    exportToExcel(): void {
+        const workbook = new ExcelJS.Workbook();
+        const worksheet = workbook.addWorksheet('Table Data');
+
+        // Define the table columns
+        const columns = [
+            {
+                header: this.translationService.getInstant(
+                    'DASHBOARD.QUESTION_NAME'
+                ),
+                key: 'question',
+            },
+            {
+                header: this.translationService.getInstant(
+                    'DASHBOARD.EXCELLENT'
+                ),
+                key: 'excellent',
+            },
+            {
+                header: this.translationService.getInstant('DASHBOARD.GOOD'),
+                key: 'good',
+            },
+            {
+                header: this.translationService.getInstant('DASHBOARD.AVERAGE'),
+                key: 'average',
+            },
+            {
+                header: this.translationService.getInstant('DASHBOARD.POOR'),
+                key: 'poor',
+            },
+            {
+                header: this.translationService.getInstant(
+                    'DASHBOARD.VERY_POOR'
+                ),
+                key: 'very_poor',
+            },
+        ];
+
+        worksheet.columns = columns;
+        worksheet.addRows(this.dataTable);
+
+        workbook.csv.writeBuffer().then((data: any) => {
+            const blob = new Blob([data], {
+                type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'แบบประเมินวิทยากร' + this.fileType;
+            a.click();
+            window.URL.revokeObjectURL(url);
+        });
     }
 }
