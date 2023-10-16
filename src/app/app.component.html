@@ -22,8 +22,8 @@
         </div>
     </div>
     <div>
-        <div class="grid pr-2">
-            <div class="col-6 align-self-end">
+        <div class="flex flex-row gap-2 pb-3 pr-1">
+            <div>
                 <p-dropdown
                     [options]="language"
                     [(ngModel)]="selectedLanguage"
@@ -35,26 +35,47 @@
                 ></p-dropdown>
             </div>
             <div
-                class="col-6 mb-2 surface-100 border-round pb-0 align-self-end"
+                class="surface-100 border-round pb-0 align-self-end cursor-pointer"
+                (click)="sidebarVisible2 = true"
             >
-                <div class="grid">
-                    <div class="col-6 m-0 mr-2">
+                <div class="flex flex-row gap-2 p-2">
+                    <div>
                         <p class="m-0 text-xs">Admin01</p>
                         <p class="m-0 text-xs">ADMIN</p>
                     </div>
-                    <div
-                        class="col-5 m-0 flex justify-content-center align-items-center"
-                    >
-                        <div
-                            class="flex align-items-center justify-content-center bg-white border-round"
-                            style="width: 2rem; height: 1.8rem"
-                        >
-                            A
-                        </div>
+                    <div>
+                        <p-avatar
+                            label="A"
+                            [style]="{ 'background-color': '#ffffff' }"
+                        ></p-avatar>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<p-sidebar [(visible)]="sidebarVisible2" position="right">
+    <ng-template pTemplate="header"
+        ><p class="m-0 text-xl">User Profile</p>
+    </ng-template>
+    <ng-template pTemplate="body">
+        <div class="flex flex-row gap-4 align-items-center">
+            <p-avatar
+                label="A"
+                [style]="{ 'background-color': '#609AF8', color: '#ffffff' }"
+                pBadge
+                severity="success"
+            ></p-avatar>
+            <div class="flex flex-column gap-2">
+                <p class="m-0">Admin 01</p>
+                <button
+                    class="bg-blue-100 hover:bg-blue-400 border-none border-round-md text-blue-400 hover:text-white px-3 py-2"
+                >
+                    Sign out
+                </button>
+            </div>
+        </div>
+        <div class="border-bottom-1 mt-3 border-300"></div>
+    </ng-template>
+</p-sidebar>
 <router-outlet></router-outlet>

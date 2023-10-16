@@ -9,6 +9,10 @@ import { DashboardModule } from './pages/dashboard/dashboard.module';
 
 import { MenubarModule } from 'primeng/menubar';
 import { DropdownModule } from 'primeng/dropdown';
+import { SidebarModule } from 'primeng/sidebar';
+import { AvatarModule } from 'primeng/avatar';
+import { AvatarGroupModule } from 'primeng/avatargroup';
+import { BadgeModule } from 'primeng/badge';
 
 @NgModule({
     declarations: [AppComponent],
@@ -20,6 +24,10 @@ import { DropdownModule } from 'primeng/dropdown';
         DashboardModule,
         MenubarModule,
         DropdownModule,
+        SidebarModule,
+        AvatarModule,
+        AvatarGroupModule,
+        BadgeModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

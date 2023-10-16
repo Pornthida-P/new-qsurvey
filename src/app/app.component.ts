@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
 
     language: Language[] | undefined;
 
+    sidebarVisible2: boolean = false;
     selectedLanguage: Language | undefined;
     menuItems: MenuItem[] = [
         { label: 'Dashboard', routerLink: ['/dashboard'] },
