@@ -57,4 +57,8 @@ export class TranslationService {
             this.translate.getDefaultLang()
         );
     }
+
+    getInstant(vocab: string) {
+        return this.translate.instant(vocab);
+    }
 }

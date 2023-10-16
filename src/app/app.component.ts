@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api';
 import { TranslationService } from './i18n/translation.service';
+import { locale as enLang } from 'src/assets/new-qsurvey/i18n/en';
+import { locale as thLang } from 'src/assets/new-qsurvey/i18n/th';
 
 interface Language {
     name: string;
@@ -18,30 +20,10 @@ export class AppComponent implements OnInit {
 
     sidebarVisible: boolean = false;
     selectedLanguage!: Language;
-    menuItems: MenuItem[] = [
-        {
-            label: 'Dashboard',
-            routerLink: ['/dashboard', { lang: this.selectedLanguage?.code }],
-        },
-        {
-            label: 'Question Management',
-            routerLink: ['/'],
-        },
-        {
-            label: 'Form Management',
-            routerLink: ['/'],
-        },
-        {
-            label: 'Channel Management',
-            routerLink: ['/'],
-        },
-        {
-            label: 'User Management',
-            routerLink: ['/'],
-        },
-    ];
+    menuItems!: MenuItem[];
 
     constructor(private translationService: TranslationService) {
+        this.translationService.loadTranslations(enLang, thLang);
         this.language = [
             { name: 'TH', code: 'th' },
             { name: 'ENG', code: 'en' },
@@ -52,11 +34,49 @@ export class AppComponent implements OnInit {
             }
         });
         this.translationService.setLanguage(this.selectedLanguage?.code);
+        this.setItemMenu();
     }
 
     ngOnInit() {}
 
     onLanguageChange(event: any) {
         this.translationService.setLanguage(event?.value?.code);
+        this.setItemMenu();
+    }
+
+    setItemMenu() {
+        this.menuItems = [
+            {
+                label: this.translationService.getInstant('MENU.DASHBOARD'),
+                routerLink: [
+                    '/dashboard',
+                    { lang: this.selectedLanguage?.code },
+                ],
+            },
+            {
+                label: this.translationService.getInstant(
+                    'MENU.QUESTION_MANAGEMENT'
+                ),
+                routerLink: ['/'],
+            },
+            {
+                label: this.translationService.getInstant(
+                    'MENU.FORM_MANAGEMENT'
+                ),
+                routerLink: ['/'],
+            },
+            {
+                label: this.translationService.getInstant(
+                    'MENU.CHANNEL_MANAGEMENT'
+                ),
+                routerLink: ['/'],
+            },
+            {
+                label: this.translationService.getInstant(
+                    'MENU.USER_MANAGEMENT'
+                ),
+                routerLink: ['/'],
+            },
+        ];
     }
 }
