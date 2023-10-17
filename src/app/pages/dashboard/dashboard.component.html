@@ -1,14 +1,13 @@
-<div class="surface-100 w-screen h-screen">
+<div>
     <div class="grid flex justify-content-center">
         <div class="col-10 flex justify-content-end">
             <div class="grid">
-                <div class="col-12">
-                    <input
-                        type="text"
-                        name="dateRange"
-                        value="01/01/2018 - 01/15/2018"
-                        class="form-control text-center"
-                    />
+                <div class="col-12 mt-2">
+                    <p-calendar
+                        [(ngModel)]="rangeDates"
+                        selectionMode="range"
+                        [readonlyInput]="true"
+                    ></p-calendar>
                     <button
                         class="bg-teal-300 border-none border-round-md text-white px-3 py-2 m-2"
                     >
